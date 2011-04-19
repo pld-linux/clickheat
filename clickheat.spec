@@ -6,7 +6,7 @@
 Summary:	ClickHeat | Clicks heatmap
 Name:		clickheat
 Version:	1.12
-Release:	0.8
+Release:	0.10
 License:	GPL v2
 Group:		Applications/WWW
 Source0:	http://downloads.sourceforge.net/clickheat/%{name}-%{version}.zip
@@ -69,13 +69,12 @@ install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_appdir},/var/{cache,log}/%{name}}
 
 cp -a . $RPM_BUILD_ROOT%{_appdir}
 ln -s %{_sysconfdir} $RPM_BUILD_ROOT%{_appdir}/config
-rm -rf $RPM_BUILD_ROOT%{_appdir}/{doc,examples}
+rm -rf $RPM_BUILD_ROOT%{_appdir}/{doc,examples,scripts}
 
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 cp -a examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 rm $RPM_BUILD_ROOT%{_appdir}/js/clickheat-original.js
-rm $RPM_BUILD_ROOT%{_appdir}/scripts/compressJs.php
 
 process_languages() {
 	echo "%dir %{_appdir}/languages"
@@ -120,7 +119,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc doc/*
+%doc doc/* scripts
 %dir %attr(770,root,http) %{_sysconfdir}
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/apache.conf
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/httpd.conf
@@ -131,11 +130,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_appdir}/*.html
 %{_appdir}/classes
 %{_appdir}/config
-%{_appdir}/clickheat
 %dir %{_appdir}/images
 %{_appdir}/images/*.png
 %{_appdir}/js
-%{_appdir}/scripts
 %{_appdir}/styles
 %{_examplesdir}/%{name}-%{version}
 %dir %attr(775,root,http) /var/cache/%{name}
