@@ -1,0 +1,13 @@
+--- clickheat/config.php~	2011-03-08 13:51:16.000000000 +0200
++++ clickheat/config.php	2011-04-20 00:11:50.864847825 +0300
+@@ -77,8 +77,8 @@
+ 	$basePath = preg_replace('~[\\\\/]+~', '/', dirname(__FILE__));
+ }
+ $clickheatDefault = array(
+-'logPath'		=> $basePath.'/logs/',
+-'cachePath'		=> $basePath.'/cache/',
++'logPath'		=> '/var/log/clickheat',
++'cachePath'		=> '/var/cache/clickheat',
+ 'referers'		=> false,
+ 'groups'		=> false,
+ 'filesize'		=> 0,
