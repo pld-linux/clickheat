@@ -1,0 +1,35 @@
+--- clickheat/index.php~	2011-04-20 00:53:09.000000000 +0300
++++ clickheat/index.php	2011-04-20 00:53:11.781485704 +0300
+@@ -72,7 +72,7 @@
+ {
+ 	$lang = strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2));
+ }
+-if (!isset($lang) || !in_array($lang, $__languages))
++if (!isset($lang) || !in_array($lang, $__languages) || !file_exists(CLICKHEAT_ROOT.'languages/'.$lang.'.php'))
+ {
+ 	$lang = 'en';
+ }
+--- clickheat/view.php~	2011-03-08 13:51:16.000000000 +0200
++++ clickheat/view.php	2011-04-20 00:52:19.615980496 +0300
+@@ -92,6 +92,9 @@
+ <?php
+ foreach ($__languages as $lang)
+ {
++	if (!file_exists(CLICKHEAT_ROOT.'languages/'.$lang.'.php')) {
++		continue;
++	}
+ 	echo '<a href="', CLICKHEAT_INDEX_PATH, 'language=', $lang, '"><img src="', CLICKHEAT_PATH, 'images/flags/', $lang, '.png" width="18" height="12" alt="', $lang, '" /></a> ';
+ }
+ ?><br />
+--- clickheat/login.php~	2011-03-08 13:51:16.000000000 +0200
++++ clickheat/login.php	2011-04-20 00:52:40.036830709 +0300
+@@ -17,6 +17,9 @@
+ <?php
+ foreach ($__languages as $lang) 
+ {
++	if (!file_exists(CLICKHEAT_ROOT.'languages/'.$lang.'.php')) {
++		continue;
++	}
+ 	echo '<a href="', CLICKHEAT_INDEX_PATH, 'language=', $lang, '"><img src="', CLICKHEAT_PATH, 'images/flags/', $lang, '.png" width="18" height="12" alt="', $lang, '" /></a> ';
+ }
+ ?></div>
