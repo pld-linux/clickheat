@@ -6,7 +6,7 @@
 Summary:	ClickHeat | Clicks heatmap
 Name:		clickheat
 Version:	1.12
-Release:	0.10
+Release:	0.11
 License:	GPL v2
 Group:		Applications/WWW
 Source0:	http://downloads.sourceforge.net/clickheat/%{name}-%{version}.zip
@@ -16,9 +16,12 @@ Source2:	lighttpd.conf
 Source3:	config.php
 Patch0:		paths.patch
 Patch1:		languages.patch
+Patch2:		js-scoping.patch
 URL:		http://www.labsmedia.com/clickheat/
+BuildRequires:	js
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 BuildRequires:	rpmbuild(macros) >= 1.268
+BuildRequires:	yuicompressor
 Requires:	php-common >= 4:%{php_min_version}
 Requires:	php-gd
 Requires:	webapps
@@ -51,6 +54,7 @@ and cold click zones.
 mv %{name}/* .
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 # to satisfy deps
 %{__sed} -i -e '1s,#!/usr/bin/php5-cgi -q,#!/usr/bin/php,' scripts/compressJs.php
@@ -62,6 +66,11 @@ mv INSTALL LICENSE LISEZMOI README VERSION doc
 
 %{__rm} {cache,config,logs}/.htaccess
 rmdir cache config logs
+
+%build
+# compress .js
+yuicompressor --charset UTF-8 js/clickheat-original.js -o js/clickheat.js
+js -C -f js/clickheat.js
 
 %install
 rm -rf $RPM_BUILD_ROOT

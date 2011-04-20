@@ -1,0 +1,73 @@
+--- clickheat-1.12/scripts/compressJs.php~	2011-04-20 01:05:58.000000000 +0300
++++ clickheat-1.12/scripts/compressJs.php	2011-04-20 08:16:47.199246746 +0300
+@@ -13,5 +13,4 @@
+ }
+ Syntax_Compressor::js($str);
+ 
+-file_put_contents(dirname(__FILE__).'/../js/clickheat.js', '/** Code by www.labsmedia.com */'.$str);
+-?>
++file_put_contents(dirname(__FILE__).'/../js/clickheat.js', $str);
+--- clickheat-1.12/js/clickheat-original.js~	2011-04-20 08:16:19.000000000 +0300
++++ clickheat-1.12/js/clickheat-original.js	2011-04-20 08:16:22.158204062 +0300
+@@ -17,9 +17,26 @@
+ Windows 2000 - IE 6.0
+ Linux - Firefox 2.0.0.1, Konqueror 3.5.5, IE 7
+ */
++/*! Code by www.labsmedia.com */
+ 
+ /*global window: true*/
+ 
++(function() {
++
++/* Main variables */
++var 
++clickHeatGroup = '',
++clickHeatSite = '',
++clickHeatServer = '',
++clickHeatLastIframe = -1,
++clickHeatTime = 0,
++clickHeatQuota = -1,
++clickHeatBrowser = '',
++clickHeatDocument = '',
++clickHeatWait = 500,
++clickHeatLocalWait = 0,
++clickHeatDebug = (document.location.href.indexOf('debugclickheat') !== -1);
++
+ /* Event listener */
+ function addEvtListener(obj, evtName, f)
+ {
+@@ -49,22 +66,9 @@
+ 	}
+ }
+ 
+-/* Main variables */
+-var clickHeatGroup = '',
+-clickHeatSite = '',
+-clickHeatServer = '',
+-clickHeatLastIframe = -1,
+-clickHeatTime = 0,
+-clickHeatQuota = -1,
+-clickHeatBrowser = '',
+-clickHeatDocument = '',
+-clickHeatWait = 500,
+-clickHeatLocalWait = 0,
+-clickHeatDebug = (document.location.href.indexOf('debugclickheat') !== -1);
+-
+ /**
+-* Shows a debug string
+-**/
++ * Shows a debug string
++ */
+ function showClickHeatDebug(str)
+ {
+ 	if (clickHeatDebug === true)
+@@ -313,4 +313,7 @@
+ 		}
+ 	}
+ 	showClickHeatDebug('ClickHeat initialised with:<br/>site = ' + clickHeatSite + '<br/>group = ' + clickHeatGroup + '<br/>server = ' + clickHeatServer + '<br/>quota = ' + (clickHeatQuota === -1 ? 'unlimited' : clickHeatQuota) + '<br/>browser = ' + clickHeatBrowser + '<br/><br/><strong>Click in a blank area (not on a link) to test ClickHeat</strong>');
+-}
+\ No newline at end of file
++}
++
++// end local scope
++})();
