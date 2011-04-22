@@ -61,6 +61,15 @@
  function showClickHeatDebug(str)
  {
  	if (clickHeatDebug === true)
+@@ -251,7 +251,7 @@
+ 	return true;
+ }
+ 
+-function initClickHeat()
++window.initClickHeat = function()
+ {
+ 	var i,
+ 	iFrames,
 @@ -313,4 +313,7 @@
  		}
  	}

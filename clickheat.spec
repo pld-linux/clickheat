@@ -6,7 +6,7 @@
 Summary:	ClickHeat | Clicks heatmap
 Name:		clickheat
 Version:	1.12
-Release:	0.11
+Release:	0.12
 License:	GPL v2
 Group:		Applications/WWW
 Source0:	http://downloads.sourceforge.net/clickheat/%{name}-%{version}.zip
