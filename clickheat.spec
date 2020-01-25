@@ -2,7 +2,6 @@
 # - frontend package
 # - admin package
 %define		php_min_version 5.0.0
-%include	/usr/lib/rpm/macros.php
 Summary:	ClickHeat | Clicks heatmap
 Name:		clickheat
 Version:	1.12
